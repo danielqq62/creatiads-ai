@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { ArrowRight, Check, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FAQSection from "@/components/home/FAQSection";
+import demoCreative1 from "@/assets/demo-creative-1.jpg";
+import demoCreative2 from "@/assets/demo-creative-2.jpg";
 
 interface SolutionData {
   title: string;
@@ -11,6 +13,7 @@ interface SolutionData {
   description: string;
   features: string[];
   useCases: string[];
+  benefits: string[];
 }
 
 const solutionsData: Record<string, SolutionData> = {
@@ -20,6 +23,7 @@ const solutionsData: Record<string, SolutionData> = {
     description: "Generate product-focused ad creatives that convert shoppers into buyers. CreatiAds understands e-commerce and creates scroll-stopping visuals for your products.",
     features: ["Product image enhancement", "Dynamic ad creative generation", "Multi-format support (carousel, video, static)", "Automated A/B testing"],
     useCases: ["Product launches", "Seasonal campaigns", "Retargeting creatives", "Brand awareness"],
+    benefits: ["3x faster creative production", "40% higher CTR on average", "Save $2,000+/month on design costs"],
   },
   dropshipping: {
     title: "Dropshipping",
@@ -27,6 +31,7 @@ const solutionsData: Record<string, SolutionData> = {
     description: "Launch and test dropshipping products at lightning speed. Generate ads from product URLs and automate campaigns across platforms.",
     features: ["URL-to-ad generation", "Rapid creative testing", "Budget optimization", "Winning ad identification"],
     useCases: ["Product testing", "Scaling winners", "Multi-product campaigns", "International expansion"],
+    benefits: ["Test 10x more products", "Find winners 5x faster", "Reduce CPA by 35%"],
   },
   "app-marketing": {
     title: "App Marketing",
@@ -34,6 +39,7 @@ const solutionsData: Record<string, SolutionData> = {
     description: "Create compelling app install ads that showcase your app's value proposition and drive high-quality downloads.",
     features: ["App store screenshot ads", "Video preview generation", "Install campaign automation", "ROAS optimization"],
     useCases: ["App launches", "User acquisition", "Re-engagement campaigns", "Feature announcements"],
+    benefits: ["50% lower CPI", "2x install rate improvement", "Automated UA scaling"],
   },
   agencies: {
     title: "Agencies",
@@ -41,6 +47,7 @@ const solutionsData: Record<string, SolutionData> = {
     description: "Manage multiple client accounts from one platform. Generate on-brand creatives and automate campaigns for every client.",
     features: ["Multi-client workspace", "Brand kit management", "White-label reports", "Team collaboration"],
     useCases: ["Client onboarding", "Monthly creative refreshes", "Cross-platform campaigns", "Performance reporting"],
+    benefits: ["Handle 5x more clients", "80% less creative turnaround time", "Higher client retention"],
   },
   "generate-more-creatives": {
     title: "Generate More Creatives",
@@ -48,6 +55,7 @@ const solutionsData: Record<string, SolutionData> = {
     description: "Use AI to generate hundreds of unique ad variations in minutes. Test more, learn faster, and find your winning creative.",
     features: ["Bulk creative generation", "Style variations", "Copy alternatives", "Format adaptation"],
     useCases: ["Creative testing at scale", "Fighting ad fatigue", "Seasonal refreshes", "A/B testing"],
+    benefits: ["100+ variations in minutes", "Beat ad fatigue permanently", "Data-driven creative decisions"],
   },
   "launch-ads-faster": {
     title: "Launch Ads Faster",
@@ -55,6 +63,7 @@ const solutionsData: Record<string, SolutionData> = {
     description: "Eliminate the creative bottleneck. Generate ads and launch campaigns across platforms with a single click.",
     features: ["One-click launch", "Auto-formatted creatives", "Campaign templates", "Instant preview"],
     useCases: ["Time-sensitive promotions", "Flash sales", "Trending content", "Competitor response"],
+    benefits: ["Launch in under 5 minutes", "Zero design wait time", "React to trends instantly"],
   },
   "scale-ads-automatically": {
     title: "Scale Ads Automatically",
@@ -62,8 +71,14 @@ const solutionsData: Record<string, SolutionData> = {
     description: "Automatically scale winning campaigns, pause underperformers, and reallocate budgets for maximum ROAS.",
     features: ["Auto-scaling rules", "Budget reallocation", "Performance alerts", "Predictive optimization"],
     useCases: ["Campaign scaling", "Budget optimization", "Multi-market expansion", "Performance management"],
+    benefits: ["3.5x average ROAS", "24/7 automated optimization", "Budget waste eliminated"],
   },
 };
+
+const testimonials = [
+  { name: "Sarah K.", role: "E-commerce Owner", text: "CreatiAds cut our ad production time by 80%. We now test 5x more creatives every week." },
+  { name: "Mike L.", role: "Marketing Agency", text: "Managing 20+ clients used to be chaos. Now we deliver fresh creatives for everyone in hours." },
+];
 
 export default function SolutionPage({ slug }: { slug: string }) {
   const data = solutionsData[slug];
@@ -87,23 +102,64 @@ export default function SolutionPage({ slug }: { slug: string }) {
         {/* Hero */}
         <section className="bg-hero-gradient text-primary-foreground py-20 lg:py-28">
           <div className="container">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="max-w-3xl"
-            >
-              <p className="text-sm font-medium text-accent mb-3 uppercase tracking-wider">Solutions</p>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">{data.title}</h1>
-              <p className="text-xl text-primary-foreground/70 mb-6">{data.subtitle}</p>
-              <p className="text-primary-foreground/60 max-w-2xl mb-8">{data.description}</p>
-              <Link
-                to="/pricing"
-                className="inline-flex items-center gap-2 bg-accent-gradient text-accent-foreground px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-transform shadow-lg"
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
               >
-                Get Started <ArrowRight className="h-4 w-4" />
-              </Link>
-            </motion.div>
+                <p className="text-sm font-medium text-accent mb-3 uppercase tracking-wider">Solutions</p>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">{data.title}</h1>
+                <p className="text-xl text-primary-foreground/70 mb-6">{data.subtitle}</p>
+                <p className="text-primary-foreground/60 max-w-2xl mb-8">{data.description}</p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    to="/pricing"
+                    className="inline-flex items-center gap-2 bg-accent-gradient text-accent-foreground px-6 py-3 rounded-lg font-semibold hover:scale-105 transition-transform shadow-lg"
+                  >
+                    Get Started <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    to="/ai-image-generator"
+                    className="inline-flex items-center gap-2 border-2 border-primary-foreground/30 text-primary-foreground bg-primary-foreground/10 backdrop-blur-sm px-6 py-3 rounded-lg font-semibold hover:bg-primary-foreground/20 transition-all"
+                  >
+                    Try AI Generator
+                  </Link>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="hidden lg:block"
+              >
+                <img
+                  src={demoCreative1}
+                  alt={`${data.title} ad creative example`}
+                  className="rounded-2xl shadow-2xl animate-float"
+                />
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Benefits */}
+        <section className="py-16 bg-background">
+          <div className="container">
+            <div className="grid sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
+              {data.benefits.map((b, i) => (
+                <motion.div
+                  key={b}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="text-center bg-card rounded-xl border p-6 shadow-card"
+                >
+                  <p className="font-display font-bold text-lg text-primary">{b}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -120,7 +176,7 @@ export default function SolutionPage({ slug }: { slug: string }) {
               <ul className="space-y-4">
                 {data.features.map((f) => (
                   <li key={f} className="flex items-start gap-3">
-                    <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
+                    <Check className="h-5 w-5 text-primary mt-0.5 shrink-0" />
                     <span className="text-foreground/80">{f}</span>
                   </li>
                 ))}
@@ -144,6 +200,75 @@ export default function SolutionPage({ slug }: { slug: string }) {
                 ))}
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* Demo Image Section */}
+        <section className="py-16 bg-muted/30">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center max-w-2xl mx-auto mb-10"
+            >
+              <h2 className="text-3xl font-bold mb-4">See It in Action</h2>
+              <p className="text-muted-foreground">AI-generated ad creatives tailored for {data.title.toLowerCase()} campaigns.</p>
+            </motion.div>
+            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+              <motion.img
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                src={demoCreative1}
+                alt="Demo ad creative 1"
+                className="rounded-xl shadow-card hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300"
+              />
+              <motion.img
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                src={demoCreative2}
+                alt="Demo ad creative 2"
+                className="rounded-xl shadow-card hover:shadow-card-hover hover:scale-[1.02] transition-all duration-300"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-20 bg-background">
+          <div className="container">
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center max-w-2xl mx-auto mb-12"
+            >
+              <h2 className="text-3xl font-bold mb-4">What Our Users Say</h2>
+            </motion.div>
+            <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+              {testimonials.map((t, i) => (
+                <motion.div
+                  key={t.name}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="bg-card rounded-xl border p-6 shadow-card"
+                >
+                  <div className="flex gap-1 mb-3">
+                    {[...Array(5)].map((_, j) => (
+                      <Star key={j} className="h-4 w-4 text-accent fill-accent" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4 italic">"{t.text}"</p>
+                  <p className="font-semibold text-sm">{t.name}</p>
+                  <p className="text-xs text-muted-foreground">{t.role}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </section>
 

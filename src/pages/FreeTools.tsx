@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft } from "lucide-react";
+import { ChevronRight, ChevronLeft, Sparkles, BookOpen, Lightbulb } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import demoCreative1 from "@/assets/demo-creative-1.jpg";
+import demoCreative2 from "@/assets/demo-creative-2.jpg";
 
 interface ToolCategory {
   title: string;
@@ -174,28 +176,61 @@ export default function FreeTools() {
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <div className="bg-card rounded-lg border p-6 shadow-card">
-                    <h4 className="font-semibold mb-2">About {selectedTool}</h4>
+                  {/* Default guidance content */}
+                  <div className="bg-card rounded-xl border p-6 shadow-card">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Lightbulb className="h-5 w-5 text-accent" />
+                      <h4 className="font-semibold">About {selectedTool}</h4>
+                    </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Use our AI-powered {selectedTool.toLowerCase()} to create professional results in seconds. 
+                      Use our AI-powered {selectedTool.toLowerCase()} to create professional results in seconds.
                       Simply enter your product details or description and let the AI do the work.
                     </p>
                   </div>
-                  <div className="bg-card rounded-lg border p-6 shadow-card">
-                    <h4 className="font-semibold mb-2">How it works</h4>
+
+                  {/* Example output images */}
+                  <div className="bg-card rounded-xl border p-6 shadow-card">
+                    <h4 className="font-semibold mb-3 flex items-center gap-2">
+                      <BookOpen className="h-4 w-4 text-primary" /> Example Output
+                    </h4>
+                    <div className="grid grid-cols-2 gap-3 mb-4">
+                      <img
+                        src={demoCreative1}
+                        alt="Example AI-generated ad creative"
+                        className="w-full rounded-lg hover:scale-[1.02] transition-transform duration-300"
+                      />
+                      <img
+                        src={demoCreative2}
+                        alt="Example AI-generated ad creative"
+                        className="w-full rounded-lg hover:scale-[1.02] transition-transform duration-300"
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground">
+                      Above: Sample AI-generated creatives. Your results will appear here after generating.
+                    </p>
+                  </div>
+
+                  {/* How it works */}
+                  <div className="bg-card rounded-xl border p-6 shadow-card">
+                    <h4 className="font-semibold mb-3">How It Works</h4>
                     <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
-                      <li>Enter your product or brand details</li>
+                      <li>Enter your product or brand details in the prompt area</li>
                       <li>Select your preferences and tone</li>
-                      <li>Click Generate to get AI-powered results</li>
+                      <li>Click <strong>Generate</strong> to get AI-powered results</li>
                       <li>Copy, edit, or regenerate as needed</li>
                     </ol>
                   </div>
-                  {/* Demo placeholder */}
-                  <div className="bg-secondary/50 rounded-lg border-2 border-dashed border-primary/20 p-8 text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                      <span className="text-2xl">🎬</span>
-                    </div>
-                    <p className="text-sm text-muted-foreground">Demo video/GIF coming soon</p>
+
+                  {/* Tips */}
+                  <div className="bg-secondary/50 rounded-xl border p-6">
+                    <h4 className="font-semibold mb-2 flex items-center gap-2">
+                      <Sparkles className="h-4 w-4 text-accent" /> Pro Tips
+                    </h4>
+                    <ul className="text-sm text-muted-foreground space-y-1.5">
+                      <li>• Be specific about your target audience and product</li>
+                      <li>• Include key selling points in your description</li>
+                      <li>• Mention the platform (Meta, Google, TikTok) for optimized results</li>
+                    </ul>
                   </div>
                 </div>
               )}
