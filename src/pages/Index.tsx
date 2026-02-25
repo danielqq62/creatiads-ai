@@ -1,10 +1,12 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/home/HeroSection";
-import FeatureCards from "@/components/home/FeatureCards";
 import LogoCloud from "@/components/home/LogoCloud";
-import HowItWorksSection from "@/components/home/HowItWorksSection";
+import FeatureCards from "@/components/home/FeatureCards";
+import WorkflowSection from "@/components/home/WorkflowSection";
+import ShowcaseSection from "@/components/home/ShowcaseSection";
 import UseCasesSection from "@/components/home/UseCasesSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
 import ComparisonSection from "@/components/home/ComparisonSection";
 import FAQSection from "@/components/home/FAQSection";
 import CTASection from "@/components/home/CTASection";
@@ -17,8 +19,10 @@ const Index = () => {
         <HeroSection />
         <LogoCloud />
         <FeatureCards />
-        <HowItWorksSection />
+        <WorkflowSection />
+        <ShowcaseSection />
         <UseCasesSection />
+        <TestimonialsSection />
         <ComparisonSection />
         <FAQSection />
         <CTASection />
