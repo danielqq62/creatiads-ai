@@ -1,19 +1,29 @@
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
 
-const comparisons = [
-  { feature: "AI Image Generation", creatiads: true, canva: true, adCreative: true },
-  { feature: "AI Video Generation", creatiads: true, canva: false, adCreative: true },
-  { feature: "One-Click Ad Launch", creatiads: true, canva: false, adCreative: false },
-  { feature: "Multi-Platform Automation", creatiads: true, canva: false, adCreative: false },
-  { feature: "AI Ad Optimization", creatiads: true, canva: false, adCreative: false },
-  { feature: "Free Tools & Calculators", creatiads: true, canva: false, adCreative: false },
-  { feature: "Starting Price", creatiads: "$0/mo", canva: "$13/mo", adCreative: "$29/mo" },
+const competitors = [
+  { name: "CreatiAds", highlight: true },
+  { name: "ChatGPT" },
+  { name: "Meta Ads Mgr" },
+  { name: "AdCreative.ai" },
+  { name: "Creatify" },
+  { name: "Smartly.io" },
+];
+
+const features = [
+  { name: "AI Image Generation", values: [true, true, false, true, true, false] },
+  { name: "AI Video Generation", values: [true, true, false, true, true, false] },
+  { name: "One-Click Ad Launch", values: [true, false, true, false, false, true] },
+  { name: "Multi-Platform Automation", values: [true, false, false, false, false, true] },
+  { name: "AI Ad Optimization", values: [true, false, false, false, false, true] },
+  { name: "AI Creative + Ads Closed Loop", values: [true, false, false, false, false, false] },
+  { name: "Free Tools & Calculators", values: [true, false, false, false, false, false] },
+  { name: "Starting Price", values: ["$0/mo", "—", "Free*", "$29/mo", "$29/mo", "$$$"] },
 ];
 
 function CellValue({ value }: { value: boolean | string }) {
-  if (typeof value === "string") return <span className="text-sm font-medium">{value}</span>;
-  return value ? <Check className="h-5 w-5 text-primary mx-auto" /> : <X className="h-5 w-5 text-muted-foreground/40 mx-auto" />;
+  if (typeof value === "string") return <span className="text-xs font-medium">{value}</span>;
+  return value ? <Check className="h-4 w-4 text-primary mx-auto" /> : <X className="h-4 w-4 text-muted-foreground/30 mx-auto" />;
 }
 
 export default function ComparisonSection() {
@@ -35,26 +45,30 @@ export default function ComparisonSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto"
+          className="max-w-5xl mx-auto"
         >
           <div className="bg-card rounded-xl border shadow-card overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b bg-muted/50">
-                    <th className="text-left p-4 font-semibold">Feature</th>
-                    <th className="p-4 font-bold text-primary">CreatiAds</th>
-                    <th className="p-4 font-semibold text-muted-foreground">Canva</th>
-                    <th className="p-4 font-semibold text-muted-foreground">AdCreative.ai</th>
+                    <th className="text-left p-3 font-semibold min-w-[160px]">Feature</th>
+                    {competitors.map((c) => (
+                      <th key={c.name} className={`p-3 text-center min-w-[100px] ${c.highlight ? "font-bold text-primary" : "font-semibold text-muted-foreground text-xs"}`}>
+                        {c.name}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
-                  {comparisons.map((row, i) => (
-                    <tr key={row.feature} className={i % 2 === 0 ? "bg-background" : ""}>
-                      <td className="p-4 font-medium">{row.feature}</td>
-                      <td className="p-4 text-center"><CellValue value={row.creatiads} /></td>
-                      <td className="p-4 text-center"><CellValue value={row.canva} /></td>
-                      <td className="p-4 text-center"><CellValue value={row.adCreative} /></td>
+                  {features.map((row, i) => (
+                    <tr key={row.name} className={i % 2 === 0 ? "bg-background" : ""}>
+                      <td className="p-3 font-medium text-sm">{row.name}</td>
+                      {row.values.map((v, j) => (
+                        <td key={j} className={`p-3 text-center ${j === 0 ? "bg-primary/5" : ""}`}>
+                          <CellValue value={v} />
+                        </td>
+                      ))}
                     </tr>
                   ))}
                 </tbody>

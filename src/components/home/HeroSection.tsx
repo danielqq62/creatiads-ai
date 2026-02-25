@@ -1,13 +1,29 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroVisual from "@/assets/hero-visual.png";
 
+const slogans = [
+  { line1: "Your Ad Copilot", highlight: "in the AI Era" },
+  { line1: "You Are Your Own", highlight: "Ad Expert" },
+  { line1: "No Fear for", highlight: "Meta Ads" },
+  { line1: "Create Stunning Ads", highlight: "10x Faster" },
+];
+
 export default function HeroSection() {
+  const [sloganIdx, setSloganIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSloganIdx((prev) => (prev + 1) % slogans.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative overflow-hidden bg-hero-gradient text-primary-foreground">
-      {/* Decorative blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute -bottom-1/4 -left-1/4 w-[500px] h-[500px] rounded-full bg-primary/20 blur-3xl" />
@@ -15,7 +31,6 @@ export default function HeroSection() {
 
       <div className="container relative py-20 lg:py-28">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left text */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
@@ -25,10 +40,23 @@ export default function HeroSection() {
               <Sparkles className="h-4 w-4 text-accent" />
               AI-Powered Ad Creative Platform
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Create Stunning Ads <br />
-              <span className="text-accent">10x Faster</span> with AI
-            </h1>
+
+            <div className="h-[140px] md:h-[160px] lg:h-[180px] mb-6">
+              <AnimatePresence mode="wait">
+                <motion.h1
+                  key={sloganIdx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+                >
+                  {slogans[sloganIdx].line1} <br />
+                  <span className="text-accent">{slogans[sloganIdx].highlight}</span>
+                </motion.h1>
+              </AnimatePresence>
+            </div>
+
             <p className="text-lg text-primary-foreground/70 max-w-lg mb-8">
               Generate high-converting ad creatives, launch campaigns across Meta, Google & TikTok, and optimize performance — all in one platform.
             </p>
@@ -49,7 +77,6 @@ export default function HeroSection() {
             </div>
           </motion.div>
 
-          {/* Right visual */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
