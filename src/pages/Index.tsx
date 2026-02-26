@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import HeroSection from "@/components/home/HeroSection";
 import LogoCloud from "@/components/home/LogoCloud";
+import FeatureDeepDive from "@/components/home/FeatureDeepDive";
 import FeatureCards from "@/components/home/FeatureCards";
 import WorkflowSection from "@/components/home/WorkflowSection";
 import ShowcaseSection from "@/components/home/ShowcaseSection";
@@ -18,6 +19,7 @@ const Index = () => {
       <main className="flex-1">
         <HeroSection />
         <LogoCloud />
+        <FeatureDeepDive />
         <FeatureCards />
         <WorkflowSection />
         <ShowcaseSection />
